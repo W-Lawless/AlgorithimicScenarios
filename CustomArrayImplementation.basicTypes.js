@@ -102,19 +102,49 @@ class CustomArray {
     //ACCESS
     get(index){
         return this.data[index]
-    }
+    } // O(1)
 
+    //APPEND TO END OF ARRAY
     push(item){
         //set the data for key 0 equal to item
-        this.data[this.length] = item;
+        this.data[this.length] = item  
         //increment length to 1
         this.length++
-        //courtesy return value for logging
-        return this.length
-    }
+    }  // O(1)
+
+    //REMOVE FROM END OF ARRAY
+    pop(){ 
+        delete this.data[this.length-1]  
+        this.length--
+    } // O(1)
+
+    //REMOVE INDEX WITHIN ARRAY
+    delete(index){
+        // const target = this.data[index]
+        this.shift(index)
+    } //O(N)
+
+    //RE-ORDER INDEXES
+    shift(index){
+        for( let i = index; i < this.length-1; i++){
+            //UPDATE EXISTING MEMORY WITH VALUE NEXT IN LINE
+            this.data[i] = this.data[i+1]
+        }
+        //REMOVE PRIOR ENDING VALUE
+        delete this.data[this.length-1]
+        this.length--
+    } // O(N)
 }
 
 const customArray = new CustomArray();
 
 customArray.push('abc')
-console.log('\n\nCustom Implementation: ',customArray)
+customArray.push('def')
+customArray.push('ghi')
+console.log('\n ::',customArray)
+
+customArray.pop()
+customArray.delete(0)
+console.log('\n ::',customArray)
+
+
