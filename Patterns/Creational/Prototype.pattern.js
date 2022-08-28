@@ -44,8 +44,6 @@
 // console.log(John.toString());
 // console.log(Jane.toString());
 
-
-
 //! Serialized Copying 
 
 class Person {
@@ -118,13 +116,13 @@ const John = new Person('John', new Address('123 Abc Rd', 'London', 'United King
 //JSON Method , does not copy functions/methods or type Person
 // const Jane = JSON.parse(JSON.stringify(John))
 
-// const s = new Serializer([Person, Address])
-// const Jane = s.clone(John)
+const s = new Serializer([Person, Address])
+const Jane = s.clone(John)
 
-// Jane.name = 'Jane'
-// Jane.address.street = '321 Xyz Ln'
+Jane.name = 'Jane'
+Jane.address.street = '321 Xyz Ln'
 
-// Jane.greet()
+Jane.greet()
 //* -> Jane says Hi from Address: 321 Xyz Ln London United Kingdom
 
 
@@ -178,3 +176,6 @@ const Stacy = EmployeeFactory.newAuxOfficeEmployee('Stacy', '808')
 
 console.log(Bob.toString())
 console.log(Stacy.toString())
+
+//* -> John works at Suite 707, Address 123 Abc Rd, City London
+//* -> Stacy works at Suite 808, Address 321 Xyz Rd, City London
