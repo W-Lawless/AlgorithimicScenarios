@@ -83,5 +83,3 @@ let drawPoints = function()
 };
 
 drawPoints();
-drawPoints();
-
