@@ -80,3 +80,37 @@ const driverCheck = new CarProxy(legalDriver);
 const driverCheck2 = new CarProxy(illegalDriver);
 driverCheck.drive() //* -> Car is Driving
 driverCheck2.drive() //* -> Illegal driver
+
+
+//! Virtual Proxy Pattern
+
+class Image {
+  constructor(url) {
+    this.url = url;
+    console.log(`Loading image from ${this.url}`);
+  }
+
+  draw() {
+    console.log(`Drawing image ${this.url}`);
+  }
+}
+
+class LazyImage {
+  constructor(url) { 
+    this.url = url;
+  }
+
+  draw() {
+    if (!this.image) this.image = new Image(this.url);
+    this.image.draw();
+  }
+}
+
+function drawImage(img) {
+  console.log('About to draw the image');
+  img.draw();
+  console.log('Done drawing the image');
+}
+
+let img = new LazyImage('http://pokemon.com/pikachu.png');
+drawImage(img);
