@@ -72,9 +72,12 @@ console.log(ba.toString())
 
 ba.undo()
 console.log('Undo 1',ba.toString())
+//* -> Undo 1 Balance: 120
 
 ba.undo()
 console.log('Undo 2',ba.toString())
+//* -> Undo 2 Balance: 100
 
 ba.redo()
 console.log('Redo 1',ba.toString())
+//* -> Redo 1 Balance: 120
