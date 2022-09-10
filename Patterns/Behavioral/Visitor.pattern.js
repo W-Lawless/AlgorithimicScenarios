@@ -16,6 +16,10 @@ class NumberExpression
   {
     buffer.push(this.value.toString());
   }
+
+  accept(visitor){
+    visitor.visitNumber(this)
+  }
 }
 
 class AdditionExpression
@@ -33,6 +37,10 @@ class AdditionExpression
     buffer.push('+');
     this.right.print(buffer);
     buffer.push(')');
+  }
+
+  accept(visitor){
+    visitor.visitAddition(this)
   }
 }
 
@@ -80,3 +88,36 @@ ep.print(e, buffer2);
 
 console.log('>',buffer2.join(''))
 //* -> > (1+(2+3))
+
+
+//! Classic Visitor Pattern 
+
+class Visitor {
+    constructor() { this.buffer = [] }
+
+    visitNumber(e) {}
+    visitAddition(e) {}
+}
+
+class VisitingPrinter extends Visitor {
+    constructor() { super() }
+    visitNumber(e) {
+        this.buffer.push(e.value.toString());
+    }
+    visitAddition(e) {
+        this.buffer.push('(');
+        e.left.accept(this)
+        this.buffer.push('+');
+        e.right.accept(this)
+        this.buffer.push(')');
+    }
+    toString() {
+        return this.buffer.join('')
+    }
+}
+
+const vp = new VisitingPrinter()
+vp.visitAddition(e)
+
+console.log('^',vp.toString())
+//* -> ^ (1+(2+3))
